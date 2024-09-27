@@ -1,6 +1,4 @@
 import socket
-# import required libraries
-import socket
 from threading import Thread
 import tkinter
 from tkinter import *

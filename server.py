@@ -4,6 +4,7 @@ from threading import Thread
 host = "10.0.0.143"
 port = 312
 
+clients = {}
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -43,7 +44,7 @@ def accept_client_connection():
 
 
 if __name__ == "__main__":
-    sock.listen(3)  # here we are accepting max of three clients at once.
+    sock.listen(6) 
     print("listening on port : ", port, "......")
 
     t = Thread(target=accept_client_connection)
