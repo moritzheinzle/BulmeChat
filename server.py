@@ -22,4 +22,8 @@ def handle_clients(conn):
     while True:
         msg = conn.recv(1024)
         broadcast(msg, name + ":")
-        
+
+def broadcast(msg):
+    for client in clients:
+        client.send(bytes(prefix, "utf8") + msg)
+
