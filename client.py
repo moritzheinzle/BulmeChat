@@ -1,23 +1,26 @@
 import socket
+# import required libraries
+import socket
 from threading import Thread
-import tkinter as tk
+import tkinter
 from tkinter import *
 
-host = "10.0.0.143"
-port = "312"
 
+# receive messages in loop and display in tkinter window
 def receive():
     while True:
         try:
-            msg = s.recv(1024).decode()
-            msg_list.insert(tk.end)
+            msg = s.recv(1024).decode()  # receive messages and decode it into string.
+            msg_list.insert(tkinter.END, msg)  # insert new message at the end.
         except Exception:
             print("There is an Error Receiving Message")
 
+# get message from tkinter entry field and send the message to the server
 def send():
-    msg = my_msg.get()
-    my_msg.set("")
-    s.send(bytes(msg, "utf8"))
+    msg = my_msg.get() # get message from entry field.
+    my_msg.set("") # make the entry field blank, for new messages
+    s.send(bytes(msg, "utf8")) # send message to the server in encode form.
+
 
 window = Tk()
 window.title("Chat Application")
@@ -40,6 +43,9 @@ entry_field.pack()
 
 send_button = Button(window, text="Send", font="Aerial", fg="black", bg="blue", command=send)
 send_button.pack()
+
+host = "10.0.0.143"
+port = 312
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((host, port))
