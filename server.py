@@ -27,3 +27,16 @@ def broadcast(msg):
     for client in clients:
         client.send(bytes(prefix, "utf8") + msg)
 
+def accept_client_connection():
+    while True:
+        client_conn, client_address = sock.accept()
+        print(client_address, " has Connected")
+        client_conn.send(bytes("Welcome to the chat room, Please type ypur name to continue", "utf8"))
+        Thread(target=handle_clients, args=(client_conn)).start()
+        
+if __name__ == "__main__":
+    sock.listen(3)
+    print("listening on port : ", port, ".....")
+    t = Thread(target=accept_client_connection)
+    t.start()
+    t.join()
