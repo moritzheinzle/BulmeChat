@@ -5,21 +5,18 @@ from threading import Thread
 import tkinter
 from tkinter import *
 
-
-# receive messages in loop and display in tkinter window
 def receive():
     while True:
         try:
-            msg = s.recv(1024).decode()  # receive messages and decode it into string.
-            msg_list.insert(tkinter.END, msg)  # insert new message at the end.
+            msg = s.recv(1024).decode()
+            msg_list.insert(tkinter.END, msg)
         except Exception:
             print("There is an Error Receiving Message")
 
-# get message from tkinter entry field and send the message to the server
 def send():
-    msg = my_msg.get() # get message from entry field.
-    my_msg.set("") # make the entry field blank, for new messages
-    s.send(bytes(msg, "utf8")) # send message to the server in encode form.
+    msg = my_msg.get()
+    my_msg.set("")
+    s.send(bytes(msg, "utf8"))
 
 
 window = Tk()
