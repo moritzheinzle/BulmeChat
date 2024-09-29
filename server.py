@@ -45,7 +45,7 @@ def accept_client_connection():
 
 if __name__ == "__main__":
     sock.listen(6) 
-    print("listening on port : ", port, "......")
+    print(f"IP  :   {host}  listening on port :  {port} ......")
 
     t = Thread(target=accept_client_connection)
 
